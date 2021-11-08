@@ -6,10 +6,10 @@
         label="todo list input here"
         value=""
     ></v-textarea>
-    <v-btn
+    <v-btn v-if="mode === 'add'"
         @click="listAdd"
     >add list</v-btn>
-    <v-btn
+    <v-btn v-else
         @click="listEdit"
     >edit list</v-btn>
   </div>
@@ -23,7 +23,8 @@ export default {
   data() {
     return {
       memo: null,
-      index: null
+      index: null,
+      mode: "add"
     }
   },
   created() {
@@ -31,6 +32,7 @@ export default {
     eventBus.$on('listEdit', (memo, index) => {
       this.memo = memo
       this.index = index
+      this.mode = "edit"
       console.log(memo, index)
     })
   },
@@ -47,8 +49,9 @@ export default {
       if (this.memo == null) {
         alert("input is empty")
       } else {
-        this.$emit("listEdit", this.memo, index)
+        this.$emit("listEdit", this.memo, this.index)
         this.memo = null
+        this.mode = "add"
       }
     }
   }
