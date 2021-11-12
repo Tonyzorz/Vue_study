@@ -11,7 +11,9 @@
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuetify": "^1.2.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "process": "^0.11.10",
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
