@@ -12,6 +12,7 @@ const Users = () => import(/* webpackChunkName: "about" */ './views/Users.vue')
 const UsersDetail = () => import(/* webpackChunkName: "about" */ './views/UsersDetail.vue')
 const UsersEdit = () => import(/* webpackChunkName: "about" */ './views/UsersEdit.vue')
 const TodoList = () => import(/* webpackChunkName: "about" */ './components/TodoList.vue')
+const UsersVuex = () => import(/* webpackChunkName: "about" */ './views/UsersVuex.vue')
 
 export default new Router({
   mode: 'history',
@@ -35,13 +36,14 @@ export default new Router({
       name: 'users',
       beforeEnter: (to, from, next) => {
         console.log('to: ', to, 'from: ', from)
-        if(isUserLogin === true) {
+        next()
+        /*if(isUserLogin === true) {
           next()
 
         } else {
-          next()
+          next('/')
 
-        }
+        }*/
       },
       component: Users,
       children:[
@@ -61,6 +63,25 @@ export default new Router({
       path: '/todoList',
       name: 'todoList',
       component: TodoList
+    },
+    {
+      path: '/usersvuex',
+      name: 'UsersVuex',
+      component: UsersVuex
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "about" */ './components/login/Login.vue')
+    },
+    {
+      path: '/redirect-me',
+      //redirect: '/users'
+      redirect: { name: 'users'}
+    },
+    {
+      path: '/*',
+      redirect: {name: 'home'}
     },
   ]
 })

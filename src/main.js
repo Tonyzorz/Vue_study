@@ -15,6 +15,8 @@ export const eventBus = new Vue({
   }
 })
 
+export const EventBus = new Vue()
+
 new Vue({
   router,
   store,

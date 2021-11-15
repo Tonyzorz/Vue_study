@@ -37,6 +37,14 @@ export default {
       userId: null
     }
   },
+  beforeRouteEnter(to, from, next) {
+    console.log('before Enter')
+    next()
+  },
+  beforeRouteLeave(to, from, next){
+    console.log("before leaving route")
+    next()
+  },
   computed: {
     /*userId() {
       return this.$route.params.userId
@@ -46,7 +54,9 @@ export default {
     console.log('router', this.$router)
     console.log('route', this.$route)
   },
-
+  destroyed() {
+    console.log("Destroyed....")
+  }
 }
 </script>
 

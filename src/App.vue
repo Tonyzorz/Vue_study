@@ -17,9 +17,17 @@
             </v-list-tile-content>
           </v-list-tile>
 <!--          <v-list-tile @click="$router.push({path: '/about'})">-->
+          <v-list-tile router :to="{name: 'login'}" exact>
+            <v-list-tile-action>
+              <i class="fas fa-child"></i>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Login</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
           <v-list-tile router :to="{path: '/about'}" exact>
             <v-list-tile-action>
-              <i class="fas fa-user"></i>
+              <i class="fas fa-fish"></i>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>About</v-list-tile-title>
@@ -39,7 +47,7 @@
           >-->
           <v-list-tile router :to="{name: 'users'}" exact>
             <v-list-tile-action>
-              <i class="fas fa-user"></i>
+              <i class="fas fa-tree"></i>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Users</v-list-tile-title>
@@ -47,10 +55,18 @@
           </v-list-tile>
           <v-list-tile router :to="{path: '/todoList'}" exact>
             <v-list-tile-action>
-              <i class="fas fa-user"></i>
+              <i class="fas fa-dove"></i>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>리스트</v-list-tile-title>
+              <v-list-tile-title>리스트(No vuex)</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile router :to="{path: '/usersvuex'}" exact>
+            <v-list-tile-action>
+              <i class="fas fa-tooth"></i>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>유저들(vuex)</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -62,6 +78,7 @@
       <v-content>
         <router-view></router-view>
       </v-content>
+
       <v-footer color="indigo" app>
         <span class="white--text">&copy; 2017</span>
       </v-footer>
