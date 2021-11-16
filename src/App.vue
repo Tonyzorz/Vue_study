@@ -17,7 +17,7 @@
             </v-list-tile-content>
           </v-list-tile>
 <!--          <v-list-tile @click="$router.push({path: '/about'})">-->
-          <v-list-tile router :to="{name: 'login'}" exact>
+          <v-list-tile router :to="{name: 'ogin'}" exact>
             <v-list-tile-action>
               <i class="fas fa-child"></i>
             </v-list-tile-action>
