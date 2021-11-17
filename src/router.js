@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import store from './store'
 
 Vue.use(Router)
 
@@ -13,6 +14,25 @@ const UsersDetail = () => import(/* webpackChunkName: "about" */ './views/UsersD
 const UsersEdit = () => import(/* webpackChunkName: "about" */ './views/UsersEdit.vue')
 const TodoList = () => import(/* webpackChunkName: "about" */ './components/TodoList.vue')
 const UsersVuex = () => import(/* webpackChunkName: "about" */ './views/UsersVuex.vue')
+
+const rejectAuthUser = (to, from, next) => {
+  if (store.state.isLogin) {
+    //이미 로그인 된 유저임. 로그인 페이지로 가는거 막아야 함
+    alert("already logged in")
+    next("/")
+  } else {
+    next()
+  }
+}
+
+const onlyAuthUser = (to, from, next) => {
+  if (store.state.isLogin) {
+    //이미 로그인 된 유저임. 마이페이지 보기 가능
+    next()
+  } else {
+    next( {name: "login"})
+  }
+}
 
 export default new Router({
   mode: 'history',
@@ -72,7 +92,14 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
+      beforeEnter: rejectAuthUser,
       component: () => import(/* webpackChunkName: "about" */ './components/login/Login.vue')
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      beforeEnter: onlyAuthUser,
+      component: () => import(/* webpackChunkName: "about" */ './components/login/MyPage.vue')
     },
     {
       path: '/redirect-me',

@@ -17,7 +17,7 @@
             </v-list-tile-content>
           </v-list-tile>
 <!--          <v-list-tile @click="$router.push({path: '/about'})">-->
-          <v-list-tile router :to="{name: 'ogin'}" exact>
+          <v-list-tile v-if="isLogin === false" router :to="{name: 'login'}" exact>
             <v-list-tile-action>
               <i class="fas fa-child"></i>
             </v-list-tile-action>
@@ -74,6 +74,32 @@
       <v-toolbar color="indigo" dark fixed app>
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>Application</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items >
+          <v-menu offset-y v-if="isLogin">
+            <v-btn
+              slot="activator"
+              flat
+              dark
+              icon
+            >
+              <i class="fas fa-tree"></i>
+            </v-btn>
+            <v-list>
+              <v-list-tile router :to="{name: 'mypage'}" exact>
+                <v-list-tile-title>My Page</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile
+                  @click="logout"
+              >
+                <v-list-tile-title>Logout</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+
+          <v-btn flat v-else router :to="{name: 'login'}">Login</v-btn>
+
+        </v-toolbar-items>
       </v-toolbar>
       <v-content>
         <router-view></router-view>
@@ -96,6 +122,7 @@
 
 <script>
 //import Home from "./components/TodoList.vue"
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -104,10 +131,14 @@ export default {
   data: () => ({
     drawer: null
   }),
+  computed: {
+    ...mapState(["isLogin"]),
+  },
   props: {
     source: String
   },
   methods : {
+    ...mapActions(["logout"]),
     test() {
       alert("click")
     },
